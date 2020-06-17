@@ -1,10 +1,9 @@
-using System;
 using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Selen4TechDemo.Tests
+namespace Selen4TechDemo
 {
     [TestFixture]
     public class TestBaseClass
