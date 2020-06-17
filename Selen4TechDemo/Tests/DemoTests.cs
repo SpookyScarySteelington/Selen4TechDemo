@@ -17,7 +17,7 @@ namespace Selen4TechDemo.Tests
 
         //Selectors
         private const string GoogleSearchField = "input[title*=\"Search\"]";
-        private const string GoogleSearchButton = "btnK";
+        private const string GoogleSearchUrl = "/search";
         private const string Input = "input";
         private const string GoogleLogo = "hplogo";
 
@@ -77,20 +77,21 @@ namespace Selen4TechDemo.Tests
             DriverGc.Navigate().GoToUrl(GoogleAddress);
             Wait();
 
-            Console.WriteLine("Input query into the search box.");
-            DriverGc.FindElement(By.CssSelector(GoogleSearchField)).SendKeys(Parametric);
+            Console.WriteLine("Locate search field and input query into it.");
+            var searchField = DriverGc.FindElement(By.CssSelector(GoogleSearchField));
+            searchField.SendKeys(Parametric);
+            searchField.SendKeys(Keys.Escape);
+            Wait();
 
             //Act
-            Console.WriteLine("Locate and click the \"Feeling Lucky\" button based off of the \"Search\" button's position.");
-            var searchButton =
-                DriverGc.FindElement(By.Name(GoogleSearchButton));
-            var luckyButton = DriverGc.FindElement(RelativeBy.WithTagName(Input).RightOf(searchButton));
-            luckyButton.Click();
+            Console.WriteLine("Locate and click the \"Search\" button based off of the \"Search Field's\" position.");
+            var searchButton = DriverGc.FindElement(RelativeBy.WithTagName(Input).Below(searchField));
+            searchButton.Click();
             Wait();
 
             //Assert
-            Console.WriteLine("Validating that we have left Google");
-            Assert.IsFalse(DriverGc.Url.ToLower().Contains(GoogleAddress.Split('.')[^2]));
+            Console.WriteLine("Validating that we have left the main Google page");
+            Assert.IsTrue(DriverGc.Url.ToLower().Contains(GoogleSearchUrl));
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace Selen4TechDemo.Tests
         /// </summary>
         private static void Wait()
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(4000);
         }
     }
 }
