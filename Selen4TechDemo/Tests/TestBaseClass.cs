@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -9,6 +10,7 @@ namespace Selen4TechDemo.Tests
     public class TestBaseClass
     {
         internal static IWebDriver DriverGc;
+        internal string ScreenShotFileName = "ElementScreenShot.png";
 
         [SetUp]
         public void Setup()
@@ -20,8 +22,8 @@ namespace Selen4TechDemo.Tests
         [TearDown]
         public void Teardown()
         {
-            if (File.Exists("elementScreenshot.png"))
-                File.Delete("elementScreenshot.png");
+            if (File.Exists(ScreenShotFileName))
+                File.Delete(ScreenShotFileName);
             DriverGc.Close();
             DriverGc.Quit();
         }

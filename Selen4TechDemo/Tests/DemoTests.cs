@@ -134,9 +134,9 @@ namespace Selen4TechDemo.Tests
 
             Console.WriteLine("Create new instance and session of devTools, enable network commands, and some block file types");
             IDevTools devTools = DriverGc as IDevTools;
-            DevToolsSession session = devTools.CreateDevToolsSession();
-            session.Network.Enable(new OpenQA.Selenium.DevTools.Network.EnableCommandSettings());
-            session.Network.SetBlockedURLs(new OpenQA.Selenium.DevTools.Network.SetBlockedURLsCommandSettings()
+            DevToolsSession session = devTools?.CreateDevToolsSession();
+            session?.Network.Enable(new OpenQA.Selenium.DevTools.Network.EnableCommandSettings());
+            session?.Network.SetBlockedURLs(new OpenQA.Selenium.DevTools.Network.SetBlockedURLsCommandSettings()
             {
                 Urls = new[] { "*://*/*.css" , "*://*/*.jpg" , "*://*/*.png"}
             });
